@@ -5,13 +5,13 @@ function Register() {
   return (
     <div className="relative min-h-screen px-5 md:px-20">
       <div className="flex [&>*]:self-center md:py-10 py-6 justify-between gap-10">
-        <h1 className="font-semibold md:text-3xl text-xl">Hotel Site</h1>
+        <h1 className="font-semibold md:text-2xl text-xl">Hotel Site</h1>
       </div>
-      <form className="bg-white mx-auto w-full md:w-8/12 p-4 md:p-10 py-6 md:py-10 rounded-lg my-20">
-        <h3 className="font-semibold inline-block md:text-3xl text-xl border-b-2 border-blue-500 py-1">
+      <form className="bg-white mx-auto w-full md:w-8/12 p-4 md:p-10 py-6 md:py-10 rounded-lg md:my-5 my-10">
+        <h3 className="font-semibold inline-block md:text-2xl text-xl border-b-2 border-blue-500 py-1">
           Register
         </h3>
-        <div className="flex flex-col md:gap-8 gap-5 md:pt-10 pt-5">
+        <div className="flex flex-col gap-5 md:pt-10 pt-5">
           <div className="flex flex-col">
             <label>
               Username<span className="text-red-500">&nbsp;*</span>
