@@ -1,5 +1,7 @@
 import express from "express";
-const router = express();
+const authrouter = express();
 
-router.post("/register");
-router.post("/login");
+authrouter.post("/register");
+authrouter.post("/login");
+
+export { authrouter };
