@@ -10,9 +10,10 @@ app.use(cors());
 app.use(bodyParser.json());
 connectToDb();
 
-// app.use("/", (req, res) => {
-//   res.send("Welcome to hotel site backend");
-// });
+app.use("/auth", authrouter);
+app.all("*", (req, res) => {
+  res.send(`Route does not exist`);
+});
 app.use("/auth", authrouter);
 app.all("*", (req, res) => {
   res.send(`Route does not exist`);
