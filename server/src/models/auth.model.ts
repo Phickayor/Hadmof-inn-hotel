@@ -9,10 +9,9 @@ const authSchema = new mongoose.Schema({
     type: String
   },
   username: {
-    type: String,
-    unique: true
+    type: String
   }
 });
 
 const authModel = mongoose.model("auth", authSchema);
-module.exports = authModel;
+export default authModel;
