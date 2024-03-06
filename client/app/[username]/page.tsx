@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function page() {
-  return (
-    <div>dashboard type shit</div>
-  )
+  return <div>Dashboard before explore page</div>;
 }
 
-export default page
+export default page;

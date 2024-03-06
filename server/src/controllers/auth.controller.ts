@@ -45,7 +45,12 @@ const registerAUser = async (
         email,
         password: hashedPassword
       });
-      res.status(200).json({ message: "Account Created" });
+      const findId = await authModel.findOne({ email });
+      var id = findId._id;
+      const token = jwt.sign({ id }, process.env.SECRET_KEY, {
+        expiresIn: "2hrs"
+      });
+      res.status(200).json({ message: "Account Created", token });
     } else {
       res.status(403).json({ message: "User already have an account" });
     }
