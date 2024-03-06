@@ -42,7 +42,7 @@ function Login() {
         onSubmit={handleSubmit}
         className="bg-white mx-auto w-full md:w-8/12 p-4 md:p-10 py-6 md:py-10 rounded-lg my-10 md:my-5"
       >
-        <h3 className="font-semibold inline-block md:text-2xl text-xl border-b-2 border-blue-500 py-1">
+        <h3 className="font-semibold inline-block md:text-2xl text-xl border-b-4 border-blue-500">
           Login
         </h3>
         <div className="flex flex-col gap-5 md:pt-10 pt-5">
