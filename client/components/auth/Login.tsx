@@ -5,12 +5,16 @@ import { handleLogin, getId } from "./AuthController";
 import Swal from "sweetalert2";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { FaSpinner } from "react-icons/fa";
 function Login() {
+  const [loader, setLoader] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const spinner = <FaSpinner className="fa-spin spin " />;
   const router = useRouter();
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
+    setLoader(true);
     try {
       const loginPayload = await handleLogin(email.toLowerCase(), password);
       if (loginPayload.success) {
@@ -21,7 +25,7 @@ function Login() {
         });
         Cookies.set("token", JSON.stringify(loginPayload.token));
         const { id } = await getId(loginPayload.token);
-        id ? router.push(`/${id}`) : router.push("/auth/login");
+        id ? router.push(`/rooms`) : router.push("/auth/login");
       } else {
         Swal.fire({
           title: "Oops!",
@@ -32,6 +36,7 @@ function Login() {
     } catch (error) {
       console.error(error);
     }
+    setLoader(false);
   };
   return (
     <div className="relative min-h-screen px-5 md:px-20">
@@ -74,7 +79,7 @@ function Login() {
             type="submit"
             className="self-center bg-blue-500 cursor-pointer text-white rounded-sm py-2 px-8"
           >
-            Login
+            {loader ? spinner : "Login"}
           </button>
         </div>
         <p className="pt-6">

@@ -27,7 +27,7 @@ function Register() {
         });
         Cookies.set("token", JSON.stringify(registrationPayload.token));
         const { id } = await getId(registrationPayload.token);
-        id ? router.push(`/${id}`) : router.push("/auth/login");
+        id ? router.push("/rooms") : router.push("/auth/login");
       } else {
         Swal.fire({
           title: "Oops!",
