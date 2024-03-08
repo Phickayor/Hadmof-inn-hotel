@@ -14,16 +14,19 @@ var roomSchema = new mongoose_1.default.Schema({
         type: Number,
         required: true
     },
-    roomDescription: {
+    description: {
         type: String,
         required: true
     },
-    roomPictures: {
-        ref: "pictures",
-        type: [mongoose_1.default.Schema.ObjectId]
+    features: {
+        type: [String]
+    },
+    image: {
+        type: String,
+        required: true
     }
 }, {
     timestamps: true
 });
 var roomModel = mongoose_1.default.model("rooms", roomSchema);
-module.exports = roomModel;
+exports.default = roomModel;

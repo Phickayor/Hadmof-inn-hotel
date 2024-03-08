@@ -11,13 +11,16 @@ const roomSchema = new mongoose.Schema(
       type: Number,
       required: true
     },
-    roomDescription: {
+    description: {
       type: String,
       required: true
     },
-    roomPictures: {
-      ref: "pictures",
-      type: [mongoose.Schema.ObjectId]
+    features: {
+      type: [String]
+    },
+    image: {
+      type: String,
+      required: true
     }
   },
   {
@@ -26,4 +29,4 @@ const roomSchema = new mongoose.Schema(
 );
 
 const roomModel = mongoose.model("rooms", roomSchema);
-module.exports = roomModel;
+export default roomModel;
