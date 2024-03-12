@@ -1,6 +1,20 @@
 import roomModel from "../models/rooms.model";
 
-export const GetRooms = async (req, res: any) => {
+export const GetARoomById = async (
+  req: { body: { roomId: string } },
+  res: any
+) => {
+  try {
+    const { roomId } = req.body;
+    const selectedRoom = await roomModel.findById(roomId);
+    selectedRoom
+      ? res.status(200).json({ selectedRoom })
+      : res.status(404).json({ message: "Room not found" });
+  } catch (error) {
+    res.status(501).json({ message: error.message });
+  }
+};
+export const GetRooms = async (req: any, res: any) => {
   try {
     const roomDetails = await roomModel.find();
     roomDetails

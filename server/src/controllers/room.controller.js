@@ -39,10 +39,33 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AddRoom = exports.GetRooms = void 0;
+exports.AddRoom = exports.GetRooms = exports.GetARoomById = void 0;
 var rooms_model_1 = __importDefault(require("../models/rooms.model"));
+var GetARoomById = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var roomId, selectedRoom, error_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                roomId = req.body.roomId;
+                return [4 /*yield*/, rooms_model_1.default.findById(roomId)];
+            case 1:
+                selectedRoom = _a.sent();
+                selectedRoom
+                    ? res.status(200).json({ selectedRoom: selectedRoom })
+                    : res.status(404).json({ message: "Room not found" });
+                return [3 /*break*/, 3];
+            case 2:
+                error_1 = _a.sent();
+                res.status(501).json({ message: error_1.message });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+exports.GetARoomById = GetARoomById;
 var GetRooms = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var roomDetails, error_1;
+    var roomDetails, error_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -57,8 +80,8 @@ var GetRooms = function (req, res) { return __awaiter(void 0, void 0, void 0, fu
                         .json({ message: "An error occured, please try again " });
                 return [3 /*break*/, 3];
             case 2:
-                error_1 = _a.sent();
-                res.status(501).json({ message: error_1.message });
+                error_2 = _a.sent();
+                res.status(501).json({ message: error_2.message });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
@@ -66,7 +89,7 @@ var GetRooms = function (req, res) { return __awaiter(void 0, void 0, void 0, fu
 }); };
 exports.GetRooms = GetRooms;
 var AddRoom = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, roomName, price, description, features, image, checkRoom, createRoom, error_2;
+    var _a, roomName, price, description, features, image, checkRoom, createRoom, error_3;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -100,8 +123,8 @@ var AddRoom = function (req, res) { return __awaiter(void 0, void 0, void 0, fun
                 _b.label = 4;
             case 4: return [3 /*break*/, 6];
             case 5:
-                error_2 = _b.sent();
-                res.status(501).json({ message: error_2.message });
+                error_3 = _b.sent();
+                res.status(501).json({ message: error_3.message });
                 return [3 /*break*/, 6];
             case 6: return [2 /*return*/];
         }
