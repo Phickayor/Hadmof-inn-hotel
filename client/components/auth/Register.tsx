@@ -5,14 +5,18 @@ import React, { useState } from "react";
 import { getId, handleRegister } from "./AuthController";
 import Swal from "sweetalert2";
 import Cookies from "js-cookie";
+import { FaSpinner } from "react-icons/fa";
 
 function Register() {
+  const [loader, setLoader] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const spinner = <FaSpinner className="fa-spin spin " />;
   const router = useRouter();
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
+    setLoader(true);
     try {
       const registrationPayload = await handleRegister(
         username.toLowerCase(),
@@ -38,6 +42,7 @@ function Register() {
     } catch (error) {
       console.error(error);
     }
+    setLoader(false);
   };
   return (
     <div className="relative min-h-screen px-5 md:px-20">
@@ -92,7 +97,7 @@ function Register() {
             type="submit"
             className="self-center bg-blue-500 cursor-pointer text-white rounded-sm py-2 px-8"
           >
-            Register
+            {loader ? spinner : "Login"}
           </button>
         </div>
         <p className="pt-6">
