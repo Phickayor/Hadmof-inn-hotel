@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { GetARoom } from "./AdminController";
 import moment from "moment";
 import { GetContactDetails, getId } from "../auth/AuthController";
+import axios from "axios";
 
 function BookingConfirmation() {
   const [bookingDetails, setBookingDetails] = useState<any>(null);
@@ -11,25 +12,47 @@ function BookingConfirmation() {
   const [contactDetails, setContactDetails] = useState<any>(null);
   var token = Cookies.get("token");
 
-  function payWithPaystack(e: { preventDefault: () => void }) {
+  async function payWithPaystack(e: { preventDefault: () => void }) {
     e.preventDefault();
+    try {
+      const PAYSTACK_API_KEY =
+        "pk_test_c3c92ed8d034efde8ef609b5b649b38d7737ff3a";
+      const response = await axios.post(
+        "https://api.paystack.co/transaction/initialize",
+        {
+          email: contactDetails.email,
+          amount: bookingDetails.price
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${PAYSTACK_API_KEY}`
+          }
+        }
+      );
 
-    let handler = PaystackPop.setup({
-      key: "pk_test_c3c92ed8d034efde8ef609b5b649b38d7737ff3a", // Replace with your public key
-      email: contactDetails.email,
-      amount: bookingDetails.price * 100,
-      ref: "" + Math.floor(Math.random() * 1000000000 + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
-      // label: "Optional string that replaces customer email"
-      onClose: function () {
-        alert("Window closed.");
-      },
-      callback: function (response: { reference: string }) {
-        let message = "Payment complete! Reference: " + response.reference;
-        alert(message);
-      }
-    });
+      const responseData = response.data;
 
-    handler.openIframe();
+      // Redirect user to Paystack's payment page
+      window.location.href = responseData.data.authorization_url;
+    } catch (error) {
+      console.error("Error initiating payment:", error);
+    }
+    // let handler = PaystackPop.setup({
+    //   key: "pk_test_c3c92ed8d034efde8ef609b5b649b38d7737ff3a", // Replace with your public key
+    //   email: contactDetails.email,
+    //   amount: bookingDetails.price * 100,
+    //   ref: "" + Math.floor(Math.random() * 1000000000 + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+    //   // label: "Optional string that replaces customer email"
+    //   onClose: function () {
+    //     alert("Window closed.");
+    //   },
+    //   callback: function (response: { reference: string }) {
+    //     let message = "Payment complete! Reference: " + response.reference;
+    //     alert(message);
+    //   }
+    // });
+
+    // handler.openIframe();
   }
 
   useEffect(() => {
