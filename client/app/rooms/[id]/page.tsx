@@ -1,12 +1,10 @@
-import BookingDetails from "@/components/admin/BookingDetails";
 import SingleRoomDisplay from "@/components/admin/SingleRoomDisplay";
 import React from "react";
 
-function page() {
+function page({ params }: any) {
   return (
     <div>
-      <SingleRoomDisplay />
-      <BookingDetails />
+      <SingleRoomDisplay roomId={params.id} />
     </div>
   );
 }

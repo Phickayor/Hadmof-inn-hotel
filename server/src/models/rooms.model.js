@@ -24,6 +24,10 @@ var roomSchema = new mongoose_1.default.Schema({
     image: {
         type: String,
         required: true
+    },
+    isAvailable: {
+        type: Boolean,
+        default: true
     }
 }, {
     timestamps: true

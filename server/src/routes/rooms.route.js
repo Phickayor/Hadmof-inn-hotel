@@ -9,5 +9,4 @@ var room_controller_1 = require("../controllers/room.controller");
 var roomRouter = (0, express_1.default)();
 exports.roomRouter = roomRouter;
 roomRouter.get("/", room_controller_1.GetRooms);
-roomRouter.get("/getroom", room_controller_1.GetARoomById);
 roomRouter.post("/add", room_controller_1.AddRoom);

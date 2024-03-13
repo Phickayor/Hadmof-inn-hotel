@@ -67,3 +67,24 @@ export const getId = async (token: string) => {
     };
   }
 };
+
+export const GetContactDetails = async (userId: string) => {
+  try {
+    const res = await fetch(`${serverUrl}/auth/getcontactdetails`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ userId })
+    });
+    const data = await res.json();
+    console.log(data);
+    return res.ok ? { success: true, ...data } : { success: false, ...data };
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      message: "An error occured. Try again"
+    };
+  }
+};

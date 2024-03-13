@@ -2,8 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { GetRooms } from "./AdminController";
 import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
-import { getId } from "../auth/AuthController";
 function ExploreRooms() {
   const [rooms, setRooms] = useState([]);
   const router = useRouter();
@@ -14,7 +12,6 @@ function ExploreRooms() {
     const fetchDetails = async () => {
       const { roomDetails } = await GetRooms();
       setRooms(roomDetails);
-      console.log(roomDetails);
     };
     fetchDetails();
   }, []);
@@ -27,7 +24,7 @@ function ExploreRooms() {
         Explore Rooms
       </h1>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 py-10">
-        {rooms.map((room: any, index: number) => (
+        {rooms?.map((room: any, index: number) => (
           <div
             data-aos="zoom-in"
             data-aos-duration="1000"

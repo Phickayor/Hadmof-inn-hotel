@@ -7,7 +7,6 @@ import {
 const roomRouter = express();
 
 roomRouter.get("/", GetRooms);
-roomRouter.post("/getroom", GetARoomById);
 roomRouter.post("/add", AddRoom);
 
 export { roomRouter };
