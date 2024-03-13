@@ -23,7 +23,7 @@ function BookingConfirmation() {
           email: contactDetails.email,
           amount: bookingDetails.price
         },
-        {
+        { 
           headers: {
             Authorization: `Bearer ${PAYSTACK_API_KEY}`
           }
